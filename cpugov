@@ -1,0 +1,32 @@
+#!/bin/bash
+
+echo -e "You have the follow available governors\n"
+
+echo "1 Powersave"
+echo "2 Userspace"
+echo "3 Conservative"
+echo "4 Ondemand"
+echo -e "5 Performance\n"
+echo -e "6 Exit Program\n"
+
+while true; do
+
+read -p "Choose one:  " yn
+case $yn in
+
+[1]* ) output=$(sudo bash -c 'for i in {0..7}; do cpufreq-set -c $i -g powersave; done')
+	echo -e "Powersave mode initiated\n"; break;;
+[2]* ) output=$(sudo bash -c 'for i in {0..7}; do cpufreq-set -c $i -g userspace; done')
+	echo -e "Userspace mode initiated\n"; break;;
+[3]* ) output=$(sudo bash -c 'for i in {0..7}; do cpufreq-set -c $i -g conservative; done')
+	echo -e "Conservative mode initiated\n"; break;;
+[4]* ) output=$(sudo bash -c 'for i in {0..7}; do cpufreq-set -c $i -g ondemand; done')
+	echo -e "Ondemand mode initiated\n"; break;;
+[5]* ) output=$(sudo bash -c 'for i in {0..7}; do cpufreq-set -c $i -g performance; done')
+	echo -e "Performance mode initiated\n"; break;;
+[6]* ) exit;;
+* ) echo -e "Invalid entry\n";;
+    
+	esac
+
+done
